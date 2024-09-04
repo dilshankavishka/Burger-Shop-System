@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Burger</title>
+    <link rel="icon" type="image/x-icon" href="img/burger.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="d-flex justify-content-between align-items-center bg-light p-3">
+            <img src="img/burger.png" alt="Menu Icon" class="icon">
+            <h1 class="text-center flex-grow-1 m-0">Pinnacle Burger</h1>
+            <img src="img/burger.png" alt="Profile Icon" class="icon">
+        </header>
+
+        <div class="row">
+            <nav class="col-lg-2 col-md-3 col-4 bg-light p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="neworder.html" class="nav-link">New Order</a></li>
+                    <li class="nav-item"><a href="allorderview.html" class="nav-link">All Order View</a></li>
+                    <li class="nav-item"><a href="orderdetails.html" class="nav-link">Order Details</a></li>
+                    <li class="nav-item"><a href="customerdetails.html" class="nav-link">Customer Details</a></li>
+                    <li class="nav-item"><a href="fooditems.html" class="nav-link">Food Items</a></li>
+                </ul>
+            </nav>
+
+            <div class="col-lg-10 col-md-9 col-8 d-flex flex-column align-items-center justify-content-center p-4">
+                <h2 class="mb-4">New Order</h2>
+
+                <!-- Food Items Table -->
+                <div class="table-container w-100">
+                    <table class="table table-bordered" id="food-table">
+                        <!-- Burgers -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Burgers</th>
+                        </tr>
+                        <tr>
+                            <td>B1001</td>
+                            <td>Classic Burger (Large)</td>
+                            <td>750.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1001" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1002</td>
+                            <td>Classic Burger (Regular)</td>
+                            <td>1500.00 (15%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1002" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1003</td>
+                            <td>Turkey Burger</td>
+                            <td>1600.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1003" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1004</td>
+                            <td>Chicken Burger (Large)</td>
+                            <td>1400.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1004" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1005</td>
+                            <td>Chicken Burger (Regular)</td>
+                            <td>800.00 (20%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1005" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1006</td>
+                            <td>Cheese Burger (Large)</td>
+                            <td>1000.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1006" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1007</td>
+                            <td>Cheese Burger (Regular)</td>
+                            <td>600.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1007" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1008</td>
+                            <td>Bacon Burger</td>
+                            <td>650.00 (15%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1008" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1009</td>
+                            <td>Shawarma Burger</td>
+                            <td>800.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1009" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1010</td>
+                            <td>Olive Burger</td>
+                            <td>1800.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1010" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1012</td>
+                            <td>Double-Cheese Burger</td>
+                            <td>1250.00 (20%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1012" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1013</td>
+                            <td>Crispy Chicken Burger (Regular)</td>
+                            <td>1200.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1013" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1014</td>
+                            <td>Crispy Chicken Burger (Large)</td>
+                            <td>1600.00 (10%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1014" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1015</td>
+                            <td>Paneer Burger</td>
+                            <td>900.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1015" min="0" max="99"></td>
+                        </tr>
+                    
+                        <!-- Submarines -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Submarines</th>
+                        </tr>
+                        <tr>
+                            <td>B1016</td>
+                            <td>Crispy Chicken Submarine (Large)</td>
+                            <td>2000.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1016" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1017</td>
+                            <td>Crispy Chicken Submarine (Regular)</td>
+                            <td>1500.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1017" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1018</td>
+                            <td>Chicken Submarine (Large)</td>
+                            <td>1800.00 (3%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1018" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1019</td>
+                            <td>Chicken Submarine (Regular)</td>
+                            <td>1400.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1019" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1020</td>
+                            <td>Grinder Submarine</td>
+                            <td>2300.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1020" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1021</td>
+                            <td>Cheese Submarine</td>
+                            <td>2200.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1021" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1022</td>
+                            <td>Double Cheese n Chicken Submarine</td>
+                            <td>1900.00 (16%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1022" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1023</td>
+                            <td>Special Horgie Submarine</td>
+                            <td>2800.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1023" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1024</td>
+                            <td>MOS Special Submarine</td>
+                            <td>3000.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1024" min="0" max="99"></td>
+                        </tr>
+                    
+                        <!-- Fries -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Fries</th>
+                        </tr>
+                        <tr>
+                            <td>B1025</td>
+                            <td>Steak Fries (Large)</td>
+                            <td>1200.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1025" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1026</td>
+                            <td>Steak Fries (Medium)</td>
+                            <td>600.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1026" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1027</td>
+                            <td>French Fries (Large)</td>
+                            <td>800.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1027" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1028</td>
+                            <td>French Fries (Medium)</td>
+                            <td>650.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1028" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1029</td>
+                            <td>French Fries (Small)</td>
+                            <td>450.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1029" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1030</td>
+                            <td>Sweet Potato Fries (Large)</td>
+                            <td>600.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1030" min="0" max="99"></td>
+                        </tr>
+                    
+                        <!-- Pasta -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Pasta</th>
+                        </tr>
+                        <tr>
+                            <td>B1031</td>
+                            <td>Chicken n Cheese Pasta</td>
+                            <td>1600.00 (15%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1031" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1032</td>
+                            <td>Chicken Penne Pasta</td>
+                            <td>1700.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1032" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1033</td>
+                            <td>Ground Turkey Pasta Bake</td>
+                            <td>2900.00 (10%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1033" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1034</td>
+                            <td>Creamy Shrimp Pasta</td>
+                            <td>2000.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1034" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1035</td>
+                            <td>Lemon Butter Pasta</td>
+                            <td>1950.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1035" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1036</td>
+                            <td>Tagliatelle Pasta</td>
+                            <td>2400.00 (1%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1036" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1037</td>
+                            <td>Baked Ravioli</td>
+                            <td>2000.00 (1%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1037" min="0" max="99"></td>
+                        </tr>
+                    
+                        <!-- Chicken -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Chicken</th>
+                        </tr>
+                        <tr>
+                            <td>B1038</td>
+                            <td>Fried Chicken (Small)</td>
+                            <td>1200.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1038" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1039</td>
+                            <td>Fried Chicken (Regular)</td>
+                            <td>2300.00 (10%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1039" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1040</td>
+                            <td>Fried Chicken (Large)</td>
+                            <td>3100.00 (5%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1040" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1041</td>
+                            <td>Hot Wings (Large)</td>
+                            <td>2400.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1041" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1042</td>
+                            <td>Devilled Chicken (Large)</td>
+                            <td>900.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1042" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1043</td>
+                            <td>BBQ Chicken (Regular)</td>
+                            <td>2100.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1043" min="0" max="99"></td>
+                        </tr>
+                    
+                        <!-- Beverages -->
+                        <tr class="category-header bg-light">
+                            <th colspan="4">Beverages</th>
+                        </tr>
+                        <tr>
+                            <td>B1044</td>
+                            <td>Pepsi (330ml)</td>
+                            <td>990.00 (5%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1044" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1045</td>
+                            <td>Coca-Cola (330ml)</td>
+                            <td>1230.00</td>
+                            <td><input type="number" class="form-control spinner" id="B1045" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1046</td>
+                            <td>Sprite (330ml)</td>
+                            <td>1500.00 (3%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1046" min="0" max="99"></td>
+                        </tr>
+                        <tr>
+                            <td>B1047</td>
+                            <td>Mirinda (330ml)</td>
+                            <td>850.00 (7%)</td>
+                            <td><input type="number" class="form-control spinner" id="B1047" min="0" max="99"></td>
+                        </tr>
+                    </table>
+                    
+                    <button type="submit" class="btn btn-dark w-100" id="submit-order">Put Order</button>                   
+                </div>              
+            </div>
+        </div>
+
+        <footer class="bg-light text-center p-3">
+            <p class="m-0">Pinnacle Burger - All Rights Reserved 2024</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>
