@@ -125,6 +125,6 @@ document.addEventListener('DOMContentLoaded', renderFoodTable);
 
 document.getElementById('submit-order').addEventListener('click', () => {
     const order = getUserInput();
-    console.log(order); // This will print the order details to the console
+    //console.log(order); // This will print the order details to the console
 });
 
