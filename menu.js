@@ -1,5 +1,5 @@
 // Food items categorized
-const foodItems = {
+var foodItems = {
     "Burgers": [
         { code: "B1001", name: "Classic Burger (Large)", price: 750.00, discount: "-" },
         { code: "B1002", name: "Classic Burger (Regular)", price: 1500.00, discount: "15%" },
@@ -60,71 +60,206 @@ const foodItems = {
     ]
 };
 
-// Function to render food items in the table
+let orders = [
+    { orderId: 101, orderDate: '2024-10-04', total: 7000.00 },
+    { orderId: 102, orderDate: '2024-10-03', total: 4500.00 },
+    { orderId: 103, orderDate: '2024-10-02', total: 3600.00 },
+];
+
+function generateOrderId() {
+    var lastOrderId = localStorage.getItem('lastOrderId');
+    if (!lastOrderId) {
+        lastOrderId = 10000;
+    } else {
+        lastOrderId = parseInt(lastOrderId, 10);
+    }
+    var newOrderId = lastOrderId + 1;
+    localStorage.setItem('lastOrderId', newOrderId);
+    return 'O' + newOrderId;
+}
+
 function renderFoodTable() {
-    const table = document.getElementById('food-table');
-    
-    for (let category in foodItems) {
-        // Insert category header
-        const categoryHeader = `
-            <tr class="category-header bg-light">
-                <th colspan="4">${category}</th>
-            </tr>
-        `;
-        table.insertAdjacentHTML('beforeend', categoryHeader);
-        
-        // Insert each item under the category
-        foodItems[category].forEach(item => {
-            const row = `
-                <tr>
-                    <td>${item.code}</td>
-                    <td>${item.name}</td>
-                    <td>${item.price.toFixed(2)} ${item.discount !== '-' ? `(${item.discount})` : ''}</td>
-                    <td><input type="number" class="form-control spinner" min="0" max="99" data-code="${item.code}" data-name="${item.name}" data-price="${item.price}" data-discount="${item.discount}"></td>
-                </tr>
-            `;
-            table.insertAdjacentHTML('beforeend', row);
-        });
+    var tableBody = document.getElementById('food-table');
+    tableBody.innerHTML = ''; 
+
+    for (var category in foodItems) {
+        if (foodItems.hasOwnProperty(category)) {
+            var items = foodItems[category];
+
+            // Create category header row
+            var categoryHeader = document.createElement('tr');
+            categoryHeader.className = 'category-header bg-light';
+
+            var categoryCell = document.createElement('th');
+            categoryCell.colSpan = 4;
+            categoryCell.innerHTML = category;
+            categoryHeader.appendChild(categoryCell);
+
+            tableBody.appendChild(categoryHeader);
+
+            // Create rows for each food item
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var row = document.createElement('tr');
+
+                var codeCell = document.createElement('td');
+                codeCell.innerHTML = item.code;
+                row.appendChild(codeCell);
+
+                var nameCell = document.createElement('td');
+                nameCell.innerHTML = item.name;
+                row.appendChild(nameCell);
+
+                var priceCell = document.createElement('td');
+                if (item.discount !== '-') {
+                    priceCell.innerHTML = item.price.toFixed(2) + ' PKR (' + item.discount + ')';
+                } else {
+                    priceCell.innerHTML = item.price.toFixed(2) + ' PKR';
+                }
+                row.appendChild(priceCell);
+
+                var quantityCell = document.createElement('td');
+                var input = document.createElement('input');
+                input.type = 'number';
+                input.className = 'form-control spinner';
+                input.min = '0';
+                input.max = '99';
+                input.value = '0';
+                input.setAttribute('data-code', item.code);
+                input.setAttribute('data-name', item.name);
+                input.setAttribute('data-price', item.price);
+                input.setAttribute('data-discount', item.discount);
+                quantityCell.appendChild(input);
+                row.appendChild(quantityCell);
+
+                tableBody.appendChild(row);
+            }
+        }
     }
 }
 
+function calculateTotalPrice(price, discount, quantity) {
+    var finalPrice = price;
+    if (discount !== '-') {
+        var discountPercentage = parseFloat(discount);
+        finalPrice = price - (price * (discountPercentage / 100));
+    }
+    return finalPrice * quantity;
+}
+
+function calculateOrderTotal(items) {
+    var total = 0;
+    for (var i = 0; i < items.length; i++) {
+        total += items[i].totalPrice;
+    }
+    return total.toFixed(2);
+}
+
 function getUserInput() {
-    const inputs = document.querySelectorAll('#food-table .spinner');
-    const order = [];
+    var inputs = document.getElementsByClassName('spinner');
+    var orderedItems = [];
 
-    inputs.forEach(input => {
-        const quantity = parseInt(input.value, 10);
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        var quantity = parseInt(input.value, 10);
         if (quantity > 0) {
-            const itemCode = input.id;
+            var code = input.getAttribute('data-code');
+            var name = input.getAttribute('data-name');
+            var price = parseFloat(input.getAttribute('data-price'));
+            var discount = input.getAttribute('data-discount');
 
-            // Find the item details from the foodItems object
-            let itemDetails = {};
-            for (let category in foodItems) {
-                const item = foodItems[category].find(item => item.code === itemCode);
-                if (item) {
-                    itemDetails = item;
-                    break;
-                }
-            }
+            var totalPrice = calculateTotalPrice(price, discount, quantity);
 
-            const item = {
-                code: itemDetails.code,
-                name: itemDetails.name,
-                price: itemDetails.price,
-                discount: itemDetails.discount,
-                quantity: quantity
+            var item = {
+                code: code,
+                name: name,
+                price: price,
+                discount: discount,
+                quantity: quantity,
+                totalPrice: totalPrice
             };
-            order.push(item);
+            orderedItems.push(item);
         }
-    });
+    }
+
+    if (orderedItems.length === 0) {
+        alert("Please select at least one item to order.");
+        return null;
+    }
+
+    var order = {
+        orderId: generateOrderId(),
+        items: orderedItems,
+        orderDate: new Date().toLocaleString(),
+        totalAmount: calculateOrderTotal(orderedItems)
+    };
+
     return order;
 }
 
-// Initialize the table on page load
-document.addEventListener('DOMContentLoaded', renderFoodTable);
+// Function to handle order submission
+function handleOrderSubmission() {
+    var order = getUserInput();
+    if (order !== null) {
+        console.log(order);
+        alert("Order ID: " + order.orderId + "\nTotal Amount: PKR " + order.totalAmount + "\nOrder successfully placed!");
+        orders.push({
+            orderId: order.orderId,
+            orderDate: new Date().toLocaleString(),
+            total: order.totalAmount
+        });       
+        resetOrderForm();
+    }
+}
+    
+function resetOrderForm() {
+    var inputs = document.getElementsByClassName('spinner');
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = '';
+    }
+}
 
-document.getElementById('submit-order').addEventListener('click', () => {
-    const order = getUserInput();
-    //console.log(order); // This will print the order details to the console
-});
+// Initialize the table on page load
+window.onload = function() {
+    renderFoodTable();
+    var submitButton = document.getElementById('submit-order');
+    if (submitButton) {
+        submitButton.onclick = handleOrderSubmission;
+    }
+
+    var orderTable = document.getElementById('order-table');
+    if (orderTable) {
+        renderOrderTable();
+    }
+};
+
+// Function to render orders in the table
+function renderOrderTable() {
+    const tableBody = document.querySelector("#order-table-body");
+
+    if (!tableBody) {
+        console.error("Table body element not found");
+        return;
+    }
+    tableBody.innerHTML = '';
+
+    orders.forEach(order => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${order.orderId}</td>
+            <td>${order.orderDate}</td>
+            <td>PKR ${parseFloat(order.total).toFixed(2)}</td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+}
+function SubmitOrder(){
+    handleOrderSubmission();
+    resetOrderForm();
+    renderOrderTable();
+}
+
+window.onload = renderOrderTable();
 
