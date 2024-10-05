@@ -60,10 +60,20 @@ var foodItems = {
     ]
 };
 
-let orders = [
-    { orderId: 101, orderDate: '2024-10-04', total: 7000.00 },
-    { orderId: 102, orderDate: '2024-10-03', total: 4500.00 },
-    { orderId: 103, orderDate: '2024-10-02', total: 3600.00 },
+const orders = [
+    { orderId: 10001, orderDate: '2024-10-04', total: 7000.00 },
+    { orderId: 10002, orderDate: '2024-10-03', total: 4500.00 },
+    { orderId: 10003, orderDate: '2024-10-02', total: 3600.00 },
+    { orderId: 10004, orderDate: '2024-10-01', total: 5200.00 },
+    { orderId: 10005, orderDate: '2024-09-30', total: 6800.00 },
+    { orderId: 10006, orderDate: '2024-09-29', total: 5400.00 },
+    { orderId: 10007, orderDate: '2024-09-28', total: 3100.00 },
+    { orderId: 10008, orderDate: '2024-09-27', total: 4600.00 },
+    { orderId: 10009, orderDate: '2024-09-26', total: 7200.00 },
+    { orderId: 10010, orderDate: '2024-09-25', total: 5700.00 },
+    { orderId: 10011, orderDate: '2024-09-24', total: 6300.00 },
+    { orderId: 10012, orderDate: '2024-09-23', total: 3900.00 },
+    { orderId: 10013, orderDate: '2024-09-22', total: 4800.00 }
 ];
 
 function generateOrderId() {
@@ -233,28 +243,68 @@ window.onload = function() {
     }
 };
 
-// Function to render orders in the table
-function renderOrderTable() {
-    const tableBody = document.querySelector("#order-table-body");
+function addOrdersToTable() {   
 
-    if (!tableBody) {
-        console.error("Table body element not found");
-        return;
-    }
+    const tableBody = document.getElementById('order-table-body');
+
     tableBody.innerHTML = '';
 
     orders.forEach(order => {
         const row = document.createElement('tr');
 
-        row.innerHTML = `
-            <td>${order.orderId}</td>
-            <td>${order.orderDate}</td>
-            <td>PKR ${parseFloat(order.total).toFixed(2)}</td>
-        `;
+        const orderIdCell = document.createElement('td');
+        orderIdCell.textContent = order.orderId;
+        row.appendChild(orderIdCell);
+
+        const orderDateCell = document.createElement('td');
+        orderDateCell.textContent = order.orderDate;
+        row.appendChild(orderDateCell);
+
+        const totalCell = document.createElement('td');
+        totalCell.textContent = order.total.toFixed(2);
+        row.appendChild(totalCell);
 
         tableBody.appendChild(row);
     });
 }
+
+window.onload = addOrdersToTable;
+
+function orderSearch() {
+    const searchId = parseInt(document.querySelector('.search-form input').value);
+
+    const order = orders.find(odr => odr.orderId === searchId);
+
+    if (order) {
+        document.getElementById('Id').value = order.orderId;
+        document.getElementById('Total').value = order.total.toFixed(2);
+        document.getElementById('Date').value = order.orderDate;
+    } else {
+        alert('Order not found!');
+    }
+}
+// Function to render orders in the table
+// function renderOrderTable() {
+//     const tableBody = document.querySelector("#order-table-body");
+
+//     if (!tableBody) {
+//         console.error("Table body element not found");
+//         return;
+//     }
+//     tableBody.innerHTML = '';
+
+//     orders.forEach(order => {
+//         const row = document.createElement('tr');
+
+//         row.innerHTML = `
+//             <td>${order.orderId}</td>
+//             <td>${order.orderDate}</td>
+//             <td>PKR ${parseFloat(order.total).toFixed(2)}</td>
+//         `;
+
+//         tableBody.appendChild(row);
+//     });
+// }
 function SubmitOrder(){
     handleOrderSubmission();
     resetOrderForm();
